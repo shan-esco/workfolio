@@ -5,6 +5,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -44,11 +45,11 @@ export default function Portfolio() {
 
   const projects = [
     {
-      title: "NeoCommerce",
+      title: "Aztro",
       category: "Web Development",
       description: "Full-stack platform with AI-powered recommendations",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-      link: "#",
+      image: "/images/aztro/Aztro-Home.jpg",
+      link: "https://aztro.space/",
       tech: ["React", "Node.js", "AI/ML"]
     },
     {
@@ -60,11 +61,11 @@ export default function Portfolio() {
       tech: ["Figma", "After Effects", "3D"]
     },
     {
-      title: "MetaTraining",
+      title: "VR Little Village Simulation",
       category: "VR Development",
       description: "Enterprise VR training suite for Fortune 500",
-      image: "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=600&fit=crop",
-      link: "#",
+      image: "/images/village/village.png",
+      link: "https://github.com/shan-esco/Village_Environment",
       tech: ["Unity", "Unreal", "WebXR"]
     },
     {
@@ -76,6 +77,9 @@ export default function Portfolio() {
       tech: ["Three.js", "GSAP", "WebGL"]
     }
   ];
+
+  const categories = ['All', ...new Set(projects.map(project => project.category))];
+  const filteredProjects = activeCategory === 'All' ? projects : projects.filter(project => project.category === activeCategory);
 
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
@@ -127,7 +131,7 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <h1 className="text-3xl font-black tracking-tighter">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              YOUR<span className="text-white">NAME</span>
+              SHANNON<span className="text-white">ESCORIAZA</span>
             </span>
           </h1>
           <div className="flex gap-8 font-medium">
@@ -260,10 +264,29 @@ export default function Portfolio() {
                 </span>
               </h2>
               <p className="text-xl text-gray-400">Projects that make an impact</p>
+
+              <br/>
+
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`px-6 py-3 rounded-full font-semibold uppercase text-sm tracking-wider transition-all duration-300 ${
+                      activeCategory === category
+                        ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white scale-105'
+                        : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+              
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
+              {filteredProjects.map((project, index) => (
                 <div 
                   key={index}
                   className="group relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden border border-gray-800 hover:border-cyan-400/50 transition-all duration-500 hover:scale-[1.02]"
@@ -330,15 +353,15 @@ export default function Portfolio() {
             </div>
             
             <div className="flex justify-center gap-6 mb-12">
-              <a href="mailto:your.email@example.com" 
+              <a href="mailto:shanescobiz@gmail.com" 
                  className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-cyan-400 transition-all hover:scale-110">
                 <Mail className="w-10 h-10 text-cyan-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://github.com/yourusername" 
+              <a href="https://github.com/shan-esco" 
                  className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-purple-400 transition-all hover:scale-110">
                 <Github className="w-10 h-10 text-purple-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://linkedin.com/in/yourusername" 
+              <a href="https://www.linkedin.com/in/shan-esco/" 
                  className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-pink-400 transition-all hover:scale-110">
                 <Linkedin className="w-10 h-10 text-pink-400 group-hover:scale-110 transition-transform" />
               </a>
@@ -373,7 +396,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="relative border-t border-gray-800 py-10">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-gray-500">© 2024 Your Name. Crafted with <span className="text-cyan-400">⚡</span> and <span className="text-purple-400">code</span></p>
+          <p className="text-gray-500">© 2026 Shannon Escoriaza. Crafted with <span className="text-cyan-400">⚡</span> and <span className="text-purple-400">code</span></p>
         </div>
       </footer>
     </div>
