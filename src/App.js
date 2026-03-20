@@ -40,6 +40,12 @@ export default function Portfolio() {
       title: "VR Development",
       description: "Immersive realities that blur the line between digital and physical. Built for the metaverse era.",
       color: "from-purple-500 to-indigo-500"
+    },
+     {
+      icon: <Boxes className="w-10 h-10" />,
+      title: "UX/UI Design",
+      description: "Immersive realities that blur the line between digital and physical. Built for the metaverse era.",
+      color: "from-green-500 to-indigo-500"
     }
   ];
 
@@ -48,34 +54,146 @@ export default function Portfolio() {
       title: "Aztro",
       category: "Web Development",
       description: "Full-stack platform with AI-powered recommendations",
-      image: "/images/aztro/Aztro-Home.jpg",
+      image: "/images/aztro/image.png",
       link: "https://aztro.space/",
       tech: ["React", "Node.js", "AI/ML"]
     },
     {
-      title: "Quantum Brand",
+      title: "Identity Branding",
       category: "Graphic Design",
-      description: "Complete rebrand for emerging tech startup",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
-      link: "#",
+      description: "Minimalist branding for a corporate environment",
+      image: "/images/branding/branding-cover.jpg",
+      link: "https://www.behance.net/gallery/133625515/Identity-Branding",
       tech: ["Figma", "After Effects", "3D"]
     },
     {
       title: "VR Little Village Simulation",
       category: "VR Development",
-      description: "Enterprise VR training suite for Fortune 500",
+      description: "Come play in our Little Village!",
       image: "/images/village/village.png",
       link: "https://github.com/shan-esco/Village_Environment",
       tech: ["Unity", "Unreal", "WebXR"]
     },
     {
-      title: "FluxPortal",
+      title: "Soul Kitchen",
+      category: "Web Development",
+      description: "Savor the cooking through the screen as you look through our flavorful menu.",
+      image: "/images/catering/image.png",
+      link: "https://github.com/shan-esco/catering-business",
+      tech: ["Three.js", "GSAP", "WebGL"]
+    },
+    {
+      title: "Truck Design System",
+      category: "UX/UI Design",
+      description: "Design System for an all new re-design!",
+      image: "/images/autonation/DesignSystem.jpg",
+      link: "https://www.behance.net/gallery/221138663/Truck-Design-System",
+      tech: ["Three.js", "GSAP", "WebGL"]
+    },
+    {
+      title: "VR Solar System",
+      category: "VR Development",
+      description: "Explore the Solar System in real-time!",
+      image: "/images/solar/solar-cover.png",
+      link: "https://github.com/shan-esco/Village_Environment",
+      tech: ["Unity", "Unreal", "WebXR", "C#"]
+    },
+    {
+      title: "Baseball Coach Trainer",
       category: "Web Development",
       description: "Award-winning portfolio with WebGL effects",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-      link: "#",
+      image: "/images/baseball/image.png",
+      link: "https://baseball-coach.vercel.app/",
+      tech: ["Three.js", "REACT", "WebGL"]
+    },
+    {
+      title: "Off Chain",
+      category: "UX/UI Design",
+      description: "Designed in 48 hours! Come check out our decentralized wallet!",
+      image: "/images/offchain/cover.jpg",
+      link: "https://www.behance.net/gallery/154938457/Off-Chain-(Eth-Bogota)",
       tech: ["Three.js", "GSAP", "WebGL"]
-    }
+    },
+    {
+      title: "Staxx",
+      category: "Web Development",
+      description: "A decentralized marketplace for artists to showcase and monetize their work.",
+      image: "/images/staxx/staxx.jpg",
+      link: "https://ethglobal.com/showcase/staxx-bf8pf",
+      tech: ["Javascript"]
+    },
+    {
+      title: "Thorn",
+      category: "Graphic Design",
+      description: "An annnual report re-design",
+      image: "/images/thorn/cover.jpg",
+      link: "https://www.behance.net/gallery/124084975/Annual-Report",
+      tech: ["Adobe Illustrator"]
+    },
+    {
+      title: "Tacti-Wear",
+      category: "Web Development",
+      description: "A place to get home made Tactical Wear",
+      image: "/images/tacti/tacti1.jpg",
+      link: "https://www.behance.net/gallery/124086517/Tacti-Wear",
+      tech: ["React"],
+    },
+    {
+      title: "Search Results Page",
+      category: "UX/UI Design",
+      description: "AutoNation's Search Results Page Re-design",
+      image: "/images/srp/srp.png",
+      link: "https://www.autonation.com/cars-for-sale?mk=dodge",
+      tech: ["Figma"],
+    },
+    {
+      title: "Vehicle Description Page",
+      category: "Web Development",
+      description: "AutoNation's Vehicle Description Page Re-design",
+      image: "/images/vdp/vdp1.jpg",
+      link: "https://www.autonation.com/cars/2c3cdxct5ph639419/dodge-charger-2023",
+      tech: ["Figma"],
+    },
+    {
+      title: "Corona Virus VR Game",
+      category: "VR Development",
+      description: "A VR Simulation game where you can shoot all the parasites you see!",
+      image: "/images/virus/virus-cover.png",
+      link: "https://github.com/shan-esco/CoronaVirus_VRGame",
+      tech: ["Unity", "C#"],
+    },
+    {
+      title: "HappyWater",
+      category: "Graphic Design",
+      description: "HappyWater's New Label Design",
+      image: "/images/happywater/alkaline.jpg",
+      link: "https://www.behance.net/gallery/124517155/Happy-Water",
+      tech: ["Adobe Illustrator"]
+    },
+    {
+      title: "Archi-Tech",
+      category: "Web Development",
+      description: "Portfolio Template",
+      image: "/images/archi/image.png",
+      link: "https://www.archi-tech.co/",
+      tech: ["React"],
+    },
+    {
+      title: "Tennis VR Trainer",
+      category: "VR Development",
+      description: "A VR Simulation game where you can workout!",
+      image: "/images/workout/workout-cover.png",
+      link: "https://github.com/shan-esco/FitnessWorkout_VRGame",
+      tech: ["Unity", "C#"],
+    },
+    {
+      title: "AutoNation Fleet Landing Page",
+      category: "UX/UI Design",
+      description: "Re-design for AutoNation's Fleet Services Landing Page",
+      image: "/images/fleet/fleet.png",
+      link: "https://www.autonation.com/an-fleet-services",
+      tech: ["Three.js", "GSAP", "WebGL"]
+    },
   ];
 
   const categories = ['All', ...new Set(projects.map(project => project.category))];
@@ -131,7 +249,7 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <h1 className="text-3xl font-black tracking-tighter">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              SHANNON<span className="text-white">ESCORIAZA</span>
+              SHANNON<span className="text-white"> ESCORIAZA</span>
             </span>
           </h1>
           <div className="flex gap-8 font-medium">
@@ -396,7 +514,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="relative border-t border-gray-800 py-10">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-gray-500">© 2026 Shannon Escoriaza. Crafted with <span className="text-cyan-400">⚡</span> and <span className="text-purple-400">code</span></p>
+          <p className="text-gray-500">© 2026 Shannon Escoriaza All rights reserved.</p>
         </div>
       </footer>
     </div>
