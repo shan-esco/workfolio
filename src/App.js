@@ -1,50 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { Code, Palette, Boxes, Mail, Github, Linkedin, ExternalLink, ChevronDown, Sparkles, Zap, Cpu } from 'lucide-react';
+import { Code, Palette, Boxes, Mail, Github, Linkedin, ExternalLink, ChevronDown, Sparkles, Zap, Menu, X } from 'lucide-react';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeCategory, setActiveCategory] = useState('All');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
+  const navigate = (section) => {
+    setActiveSection(section);
+    setMenuOpen(false);
+  };
+
   const services = [
     {
-      icon: <Code className="w-10 h-10" />,
+      icon: <Code className="w-8 h-8 sm:w-10 sm:h-10" />,
       title: "Web Development",
       description: "Next-gen web experiences with React, Node.js, and cutting-edge frameworks. Performance-obsessed, pixel-perfect execution.",
       color: "from-cyan-500 to-blue-500"
     },
     {
-      icon: <Palette className="w-10 h-10" />,
+      icon: <Palette className="w-8 h-8 sm:w-10 sm:h-10" />,
       title: "Graphic Design",
       description: "Bold visual identities that break conventions. UI/UX that doesn't just look good—it converts.",
       color: "from-pink-500 to-rose-500"
     },
     {
-      icon: <Boxes className="w-10 h-10" />,
+      icon: <Boxes className="w-8 h-8 sm:w-10 sm:h-10" />,
       title: "VR Development",
       description: "Immersive realities that blur the line between digital and physical. Built for the metaverse era.",
       color: "from-purple-500 to-indigo-500"
     },
-     {
-      icon: <Boxes className="w-10 h-10" />,
+    {
+      icon: <Boxes className="w-8 h-8 sm:w-10 sm:h-10" />,
       title: "UX/UI Design",
-      description: "Immersive realities that blur the line between digital and physical. Built for the metaverse era.",
+      description: "Intuitive flows and delightful interfaces that users love from first click.",
       color: "from-green-500 to-indigo-500"
     }
   ];
@@ -125,7 +131,7 @@ export default function Portfolio() {
     {
       title: "Thorn",
       category: "Graphic Design",
-      description: "An annnual report re-design",
+      description: "An annual report re-design",
       image: "/images/thorn/cover.jpg",
       link: "https://www.behance.net/gallery/124084975/Annual-Report",
       tech: ["Adobe Illustrator"]
@@ -202,8 +208,8 @@ export default function Portfolio() {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Animated Background */}
-      <div className="fixed inset-0 opacity-30">
-        <div 
+      <div className="fixed inset-0 opacity-30 pointer-events-none">
+        <div
           className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20"
           style={{
             transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
@@ -246,49 +252,74 @@ export default function Portfolio() {
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black/40 backdrop-blur-xl z-50 border-b border-cyan-500/20">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <h1 className="text-3xl font-black tracking-tighter">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center">
+          {/* Logo */}
+          <h1 className="text-lg sm:text-2xl lg:text-3xl font-black tracking-tighter">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               SHANNON<span className="text-white"> ESCORIAZA</span>
             </span>
           </h1>
-          <div className="flex gap-8 font-medium">
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-6 lg:gap-8 font-medium">
             {['home', 'services', 'portfolio', 'contact'].map((section) => (
-              <button 
+              <button
                 key={section}
-                onClick={() => setActiveSection(section)} 
-                className={`hover:text-cyan-400 transition uppercase text-sm tracking-wider ${
-                  activeSection === section ? 'text-cyan-400' : ''
-                }`}
+                onClick={() => navigate(section)}
+                className={`hover:text-cyan-400 transition uppercase text-sm tracking-wider ${activeSection === section ? 'text-cyan-400' : ''}`}
               >
                 {section}
               </button>
             ))}
           </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden text-white p-2"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20 px-4 py-4 flex flex-col gap-4">
+            {['home', 'services', 'portfolio', 'contact'].map((section) => (
+              <button
+                key={section}
+                onClick={() => navigate(section)}
+                className={`uppercase text-sm tracking-wider font-medium text-left py-2 transition ${activeSection === section ? 'text-cyan-400' : 'text-white hover:text-cyan-400'}`}
+              >
+                {section}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
       {activeSection === 'home' && (
-        <section className="relative min-h-screen flex items-center justify-center px-6">
-          <div 
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6">
+          <div
             className="absolute inset-0 opacity-20"
             style={{ transform: `translateY(${scrollY * 0.5}px)` }}
           >
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl" />
+            <div className="absolute top-1/4 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-purple-500 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-cyan-500 rounded-full blur-3xl" />
           </div>
-          
-          <div className="relative z-10 text-center max-w-5xl animate-slideIn">
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <Sparkles className="w-5 h-5 text-cyan-400" />
-              <span className="text-cyan-400 font-semibold uppercase tracking-widest text-sm">
+
+          <div className="relative z-10 text-center max-w-5xl animate-slideIn px-2">
+            <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
+              <span className="text-cyan-400 font-semibold uppercase tracking-widest text-xs sm:text-sm">
                 Digital Craftsman
               </span>
-              <Sparkles className="w-5 h-5 text-pink-400" />
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400" />
             </div>
-            
-            <h2 className="text-8xl font-black mb-6 leading-tight tracking-tighter">
+
+            <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 leading-tight tracking-tighter">
               <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
                 Building The
               </span>
@@ -297,31 +328,31 @@ export default function Portfolio() {
                 Future of Web
               </span>
             </h2>
-            
-            <p className="text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-              Architecting digital experiences that push boundaries. 
+
+            <p className="text-base sm:text-xl lg:text-2xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto font-light px-2">
+              Architecting digital experiences that push boundaries.
               <span className="text-white font-medium"> Web development, design, and VR</span> that doesn't compromise.
             </p>
-            
-            <div className="flex gap-6 justify-center">
-              <button 
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
                 onClick={() => setActiveSection('portfolio')}
-                className="group relative bg-gradient-to-r from-cyan-500 to-purple-500 px-10 py-4 rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 animate-glow"
+                className="group relative bg-gradient-to-r from-cyan-500 to-purple-500 px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg overflow-hidden transition-all hover:scale-105 animate-glow"
               >
                 <span className="relative z-10">View Work</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
-              
-              <button 
+
+              <button
                 onClick={() => setActiveSection('contact')}
-                className="border-2 border-cyan-400 hover:bg-cyan-400/10 px-10 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 hover:border-purple-400"
+                className="border-2 border-cyan-400 hover:bg-cyan-400/10 px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all hover:scale-105 hover:border-purple-400"
               >
                 Let's Talk
               </button>
             </div>
 
-            <div className="mt-20 animate-bounce">
-              <ChevronDown className="w-8 h-8 mx-auto text-cyan-400" />
+            <div className="mt-12 sm:mt-20 animate-bounce">
+              <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 mx-auto text-cyan-400" />
             </div>
           </div>
         </section>
@@ -329,39 +360,34 @@ export default function Portfolio() {
 
       {/* Services Section */}
       {activeSection === 'services' && (
-        <section className="relative min-h-screen pt-32 pb-20 px-6">
+        <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20">
-              <h2 className="text-7xl font-black mb-6 tracking-tighter">
+            <div className="text-center mb-12 sm:mb-20">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                   What I Do
                 </span>
               </h2>
-              <p className="text-xl text-gray-400">Expertise that delivers results</p>
+              <p className="text-base sm:text-xl text-gray-400">Expertise that delivers results</p>
             </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8">
               {services.map((service, index) => (
-                <div 
+                <div
                   key={index}
-                  className="group relative bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-transparent transition-all duration-500 hover:scale-105"
-                  style={{
-                    animationDelay: `${index * 0.1}s`
-                  }}
+                  className="group relative bg-gradient-to-br from-gray-900 to-black p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-transparent transition-all duration-500 hover:scale-105"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`} />
-                  
-                  <div className={`relative inline-block p-4 rounded-xl bg-gradient-to-br ${service.color} mb-6`}>
-                    <div className="text-white">
-                      {service.icon}
-                    </div>
+
+                  <div className={`relative inline-block p-3 sm:p-4 rounded-xl bg-gradient-to-br ${service.color} mb-4 sm:mb-6`}>
+                    <div className="text-white">{service.icon}</div>
                   </div>
-                  
-                  <h3 className="text-3xl font-bold mb-4">{service.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{service.description}</p>
-                  
-                  <div className="mt-6 flex items-center text-cyan-400 font-semibold group-hover:gap-2 transition-all">
-                    Learn More 
+
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">{service.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-400 leading-relaxed">{service.description}</p>
+
+                  <div className="mt-4 sm:mt-6 flex items-center text-cyan-400 font-semibold group-hover:gap-2 transition-all text-sm sm:text-base">
+                    Learn More
                     <ExternalLink className="w-4 h-4 ml-2 group-hover:ml-0 transition-all" />
                   </div>
                 </div>
@@ -373,24 +399,23 @@ export default function Portfolio() {
 
       {/* Portfolio Section */}
       {activeSection === 'portfolio' && (
-        <section className="relative min-h-screen pt-32 pb-20 px-6">
+        <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20">
-              <h2 className="text-7xl font-black mb-6 tracking-tighter">
+            <div className="text-center mb-10 sm:mb-20">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
                 <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   Featured Work
                 </span>
               </h2>
-              <p className="text-xl text-gray-400">Projects that make an impact</p>
+              <p className="text-base sm:text-xl text-gray-400 mb-6 sm:mb-8">Projects that make an impact</p>
 
-              <br/>
-
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
+              {/* Category Filter */}
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-6 py-3 rounded-full font-semibold uppercase text-sm tracking-wider transition-all duration-300 ${
+                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 ${
                       activeCategory === category
                         ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white scale-105'
                         : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
@@ -400,53 +425,52 @@ export default function Portfolio() {
                   </button>
                 ))}
               </div>
-              
             </div>
-            
-            <div className="grid md:grid-cols-2 gap-8">
+
+            <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
               {filteredProjects.map((project, index) => (
-                <div 
+                <div
                   key={index}
                   className="group relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden border border-gray-800 hover:border-cyan-400/50 transition-all duration-500 hover:scale-[1.02]"
                 >
-                  <div className="relative overflow-hidden h-64">
-                    <img 
-                      src={project.image} 
+                  <div className="relative overflow-hidden h-48 sm:h-64">
+                    <img
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   </div>
-                  
-                  <div className="p-8">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Zap className="w-4 h-4 text-cyan-400" />
-                      <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
+
+                  <div className="p-5 sm:p-8">
+                    <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
+                      <span className="text-cyan-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">
                         {project.category}
                       </span>
                     </div>
-                    
-                    <h3 className="text-3xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
+
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-400 mb-4">{project.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <p className="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">{project.description}</p>
+
+                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                       {project.tech.map((tech, i) => (
-                        <span 
+                        <span
                           key={i}
-                          className="px-3 py-1 bg-gray-800 rounded-full text-xs font-semibold text-gray-300"
+                          className="px-2 sm:px-3 py-1 bg-gray-800 rounded-full text-xs font-semibold text-gray-300"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    
-                    <a 
+
+                    <a
                       href={project.link}
-                      className="inline-flex items-center gap-2 text-cyan-400 hover:text-purple-400 font-semibold transition group/link"
+                      className="inline-flex items-center gap-2 text-cyan-400 hover:text-purple-400 font-semibold transition group/link text-sm sm:text-base"
                     >
-                      View Project 
+                      View Project
                       <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
                     </a>
                   </div>
@@ -459,51 +483,51 @@ export default function Portfolio() {
 
       {/* Contact Section */}
       {activeSection === 'contact' && (
-        <section className="relative min-h-screen pt-32 pb-20 px-6 flex items-center">
+        <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6 flex items-center">
           <div className="max-w-4xl mx-auto w-full">
-            <div className="text-center mb-16">
-              <h2 className="text-7xl font-black mb-6 tracking-tighter">
+            <div className="text-center mb-10 sm:mb-16">
+              <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
                 <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
                   Let's Build Something
                 </span>
               </h2>
-              <p className="text-2xl text-gray-400">Got a project in mind? Let's make it happen.</p>
+              <p className="text-base sm:text-2xl text-gray-400">Got a project in mind? Let's make it happen.</p>
             </div>
-            
-            <div className="flex justify-center gap-6 mb-12">
-              <a href="mailto:shanescobiz@gmail.com" 
-                 className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-cyan-400 transition-all hover:scale-110">
-                <Mail className="w-10 h-10 text-cyan-400 group-hover:scale-110 transition-transform" />
+
+            <div className="flex justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
+              <a href="mailto:shanescobiz@gmail.com"
+                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-cyan-400 transition-all hover:scale-110">
+                <Mail className="w-7 h-7 sm:w-10 sm:h-10 text-cyan-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://github.com/shan-esco" 
-                 className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-purple-400 transition-all hover:scale-110">
-                <Github className="w-10 h-10 text-purple-400 group-hover:scale-110 transition-transform" />
+              <a href="https://github.com/shan-esco"
+                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-purple-400 transition-all hover:scale-110">
+                <Github className="w-7 h-7 sm:w-10 sm:h-10 text-purple-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://www.linkedin.com/in/shan-esco/" 
-                 className="group p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-pink-400 transition-all hover:scale-110">
-                <Linkedin className="w-10 h-10 text-pink-400 group-hover:scale-110 transition-transform" />
+              <a href="https://www.linkedin.com/in/shan-esco/"
+                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-pink-400 transition-all hover:scale-110">
+                <Linkedin className="w-7 h-7 sm:w-10 sm:h-10 text-pink-400 group-hover:scale-110 transition-transform" />
               </a>
             </div>
-            
-            <div className="bg-gradient-to-br from-gray-900 to-black p-10 rounded-3xl border border-gray-800">
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <input 
-                  type="text" 
+
+            <div className="bg-gradient-to-br from-gray-900 to-black p-6 sm:p-10 rounded-3xl border border-gray-800">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                <input
+                  type="text"
                   placeholder="Your Name"
-                  className="bg-black/50 border border-gray-800 rounded-xl px-6 py-4 focus:outline-none focus:border-cyan-400 transition-colors text-lg"
+                  className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full"
                 />
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   placeholder="Your Email"
-                  className="bg-black/50 border border-gray-800 rounded-xl px-6 py-4 focus:outline-none focus:border-cyan-400 transition-colors text-lg"
+                  className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full"
                 />
               </div>
-              <textarea 
+              <textarea
                 placeholder="Tell me about your project..."
                 rows="6"
-                className="w-full bg-black/50 border border-gray-800 rounded-xl px-6 py-4 mb-6 focus:outline-none focus:border-cyan-400 transition-colors text-lg"
+                className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 mb-4 sm:mb-6 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg"
               ></textarea>
-              <button className="w-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 px-10 py-5 rounded-xl font-bold text-xl transition-all hover:scale-[1.02] animate-glow">
+              <button className="w-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-bold text-lg sm:text-xl transition-all hover:scale-[1.02] animate-glow">
                 Send Message
               </button>
             </div>
@@ -512,9 +536,9 @@ export default function Portfolio() {
       )}
 
       {/* Footer */}
-      <footer className="relative border-t border-gray-800 py-10">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-gray-500">© 2026 Shannon Escoriaza All rights reserved.</p>
+      <footer className="relative border-t border-gray-800 py-8 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-sm sm:text-base text-gray-500">© 2026 Shannon Escoriaza. All rights reserved.</p>
         </div>
       </footer>
     </div>
