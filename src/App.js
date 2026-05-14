@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Code, Palette, Boxes, Mail, Github, Linkedin, ExternalLink, ChevronDown, Sparkles, Zap, Menu, X } from 'lucide-react';
+import { Code, Smartphone, Boxes, Mail, Github, Linkedin, ExternalLink, ChevronDown, Sparkles, Zap, Menu, X, Check, Star, Layers, Gamepad2 } from 'lucide-react';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
@@ -7,16 +7,14 @@ export default function Portfolio() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeCategory, setActiveCategory] = useState('All');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeServiceTab, setActiveServiceTab] = useState('Web Development');
+  const [billingCycle, setBillingCycle] = useState('project');
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
+    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -36,24 +34,316 @@ export default function Portfolio() {
       color: "from-cyan-500 to-blue-500"
     },
     {
-      icon: <Palette className="w-8 h-8 sm:w-10 sm:h-10" />,
-      title: "Graphic Design",
-      description: "Bold visual identities that break conventions. UI/UX that doesn't just look good—it converts.",
-      color: "from-pink-500 to-rose-500"
+      icon: <Smartphone className="w-8 h-8 sm:w-10 sm:h-10" />,
+      title: "Mobile App Development",
+      description: "Native and cross-platform apps built for performance, usability, and scale. iOS and Android covered.",
+      color: "from-green-500 to-emerald-500"
     },
     {
-      icon: <Boxes className="w-8 h-8 sm:w-10 sm:h-10" />,
-      title: "VR Development",
+      icon: <Code className="w-8 h-8 sm:w-10 sm:h-10" />,
+      title: "Software Development",
+      description: "Custom software solutions from backend systems to full-stack platforms. Built to last and built to scale.",
+      color: "from-orange-500 to-yellow-500"
+    },
+    {
+      icon: <Gamepad2 className="w-8 h-8 sm:w-10 sm:h-10" />,
+      title: "VR / Game Design",
       description: "Immersive realities that blur the line between digital and physical. Built for the metaverse era.",
       color: "from-purple-500 to-indigo-500"
     },
     {
-      icon: <Boxes className="w-8 h-8 sm:w-10 sm:h-10" />,
+      icon: <Layers className="w-8 h-8 sm:w-10 sm:h-10" />,
       title: "UX/UI Design",
       description: "Intuitive flows and delightful interfaces that users love from first click.",
-      color: "from-green-500 to-indigo-500"
+      color: "from-pink-500 to-rose-500"
     }
   ];
+
+  const pricingData = {
+    "Web Development": {
+      color: "from-cyan-500 to-blue-500",
+      tiers: [
+        {
+          name: "Starter",
+          tagline: "Great for personal sites & landing pages",
+          projectPrice: 499,
+          retainerPrice: 299,
+          featured: false,
+          features: [
+            "1 Custom Page or Landing Page",
+            "Mobile Responsive Design",
+            "Basic SEO Setup",
+            "1 Round of Revisions",
+            "2-Week Delivery",
+            "Contact Form Integration",
+            "30-Day Post-Launch Support",
+          ]
+        },
+        {
+          name: "Pro",
+          tagline: "Full websites for growing businesses",
+          projectPrice: 1299,
+          retainerPrice: 999,
+          featured: true,
+          features: [
+            "Up to 5 Custom Pages",
+            "Advanced SEO & Performance",
+            "3 Rounds of Revisions",
+            "4-Week Delivery",
+            "CMS Integration",
+            "Google Analytics Setup",
+            "60-Day Post-Launch Support",
+            "Priority Support",
+          ]
+        },
+        {
+          name: "Enterprise",
+          tagline: "Complex platforms & web applications",
+          projectPrice: 3499,
+          retainerPrice: 2499,
+          featured: false,
+          features: [
+            "Unlimited Pages & Sections",
+            "Custom Web App / Dashboard",
+            "API Integrations",
+            "Advanced Animations",
+            "Unlimited Revisions",
+            "6-Week Delivery",
+            "90-Day Post-Launch Support",
+            "Dedicated Slack Channel",
+          ]
+        }
+      ]
+    },
+    "Mobile App Development": {
+      color: "from-green-500 to-emerald-500",
+      tiers: [
+        {
+          name: "Starter",
+          tagline: "Simple apps for one platform",
+          projectPrice: 1500,
+          retainerPrice: 999,
+          featured: false,
+          features: [
+            "iOS or Android (one platform)",
+            "Up to 5 Core Screens",
+            "Basic UI from existing design",
+            "1 Round of Revisions",
+            "4-Week Delivery",
+            "App Store Submission Help",
+            "30-Day Post-Launch Support",
+          ]
+        },
+        {
+          name: "Pro",
+          tagline: "Cross-platform apps with custom UI",
+          projectPrice: 4000,
+          retainerPrice: 2799,
+          featured: true,
+          features: [
+            "iOS + Android (React Native)",
+            "Up to 15 Screens",
+            "Custom UI/UX Design Included",
+            "Push Notifications",
+            "3 Rounds of Revisions",
+            "6-Week Delivery",
+            "Backend API Integration",
+            "60-Day Post-Launch Support",
+          ]
+        },
+        {
+          name: "Enterprise",
+          tagline: "Full-scale apps with complex systems",
+          projectPrice: 10000,
+          retainerPrice: 6999,
+          featured: false,
+          features: [
+            "iOS + Android + Web",
+            "Unlimited Screens",
+            "Custom Backend / Database",
+            "Auth, Payments & Analytics",
+            "Unlimited Revisions",
+            "10-Week Delivery",
+            "Dedicated Slack Channel",
+            "90-Day Post-Launch Support",
+          ]
+        }
+      ]
+    },
+    "Software Development": {
+      color: "from-orange-500 to-yellow-500",
+      tiers: [
+        {
+          name: "Starter",
+          tagline: "Scripts, tools & small automations",
+          projectPrice: 1000,
+          retainerPrice: 699,
+          featured: false,
+          features: [
+            "Single-purpose tool or script",
+            "Basic documentation",
+            "1 Round of Revisions",
+            "2-Week Delivery",
+            "GitHub repo handoff",
+            "30-Day Support",
+          ]
+        },
+        {
+          name: "Pro",
+          tagline: "Full-stack apps & internal platforms",
+          projectPrice: 3500,
+          retainerPrice: 2499,
+          featured: true,
+          features: [
+            "Full-Stack Web Application",
+            "Database Design & Setup",
+            "REST API Development",
+            "User Authentication",
+            "3 Rounds of Revisions",
+            "6-Week Delivery",
+            "Deployment & DevOps Setup",
+            "60-Day Post-Launch Support",
+          ]
+        },
+        {
+          name: "Enterprise",
+          tagline: "Complex systems built for scale",
+          projectPrice: 0,
+          retainerPrice: 0,
+          featured: false,
+          custom: true,
+          features: [
+            "Microservices Architecture",
+            "CI/CD Pipeline Setup",
+            "Cloud Infrastructure (AWS/GCP)",
+            "Security & Compliance Review",
+            "Unlimited Revisions",
+            "Custom Timeline",
+            "Dedicated Slack Channel",
+            "Ongoing Retainer Available",
+          ]
+        }
+      ]
+    },
+    "VR / Game Design": {
+      color: "from-purple-500 to-indigo-500",
+      tiers: [
+        {
+          name: "Starter",
+          tagline: "Simple scenes & interactive demos",
+          projectPrice: 2000,
+          retainerPrice: 1499,
+          featured: false,
+          features: [
+            "Single Environment / Scene",
+            "Basic Interactivity",
+            "Unity or Unreal Engine",
+            "1 Round of Revisions",
+            "4-Week Delivery",
+            "WebXR or standalone build",
+            "30-Day Support",
+          ]
+        },
+        {
+          name: "Pro",
+          tagline: "Multi-level games & VR experiences",
+          projectPrice: 5000,
+          retainerPrice: 3499,
+          featured: true,
+          features: [
+            "Multi-Scene / Multi-Level",
+            "Custom 3D Assets",
+            "Physics & Animation Systems",
+            "VR Headset Optimization",
+            "3 Rounds of Revisions",
+            "8-Week Delivery",
+            "Sound & FX Integration",
+            "60-Day Post-Launch Support",
+          ]
+        },
+        {
+          name: "Enterprise",
+          tagline: "Full games & immersive simulations",
+          projectPrice: 15000,
+          retainerPrice: 9999,
+          featured: false,
+          features: [
+            "Full Game or Simulation",
+            "Custom Engine Features",
+            "Multiplayer / Networked Play",
+            "Advanced AI & Pathfinding",
+            "Unlimited Revisions",
+            "Custom Timeline",
+            "Dedicated Slack Channel",
+            "90-Day Post-Launch Support",
+          ]
+        }
+      ]
+    },
+    "UX/UI Design": {
+      color: "from-pink-500 to-rose-500",
+      tiers: [
+        {
+          name: "Starter",
+          tagline: "Wireframes & simple UI design",
+          projectPrice: 299,
+          retainerPrice: 199,
+          featured: false,
+          features: [
+            "Up to 5 Screen Designs",
+            "Low or High-Fidelity Wireframes",
+            "Figma File Handoff",
+            "1 Round of Revisions",
+            "1-Week Delivery",
+            "Mobile + Desktop layouts",
+            "30-Day Support",
+          ]
+        },
+        {
+          name: "Pro",
+          tagline: "Full product design with research",
+          projectPrice: 799,
+          retainerPrice: 599,
+          featured: true,
+          features: [
+            "Up to 20 Screen Designs",
+            "UX Research & User Flows",
+            "Interactive Prototype",
+            "Design System / Components",
+            "3 Rounds of Revisions",
+            "3-Week Delivery",
+            "Developer Handoff Notes",
+            "60-Day Support",
+          ]
+        },
+        {
+          name: "Enterprise",
+          tagline: "End-to-end UX for large products",
+          projectPrice: 2500,
+          retainerPrice: 1799,
+          featured: false,
+          features: [
+            "Unlimited Screens",
+            "Full UX Audit & Research",
+            "Usability Testing",
+            "Complete Design System",
+            "Unlimited Revisions",
+            "5-Week Delivery",
+            "Stakeholder Presentation Deck",
+            "90-Day Support",
+          ]
+        }
+      ]
+    }
+  };
+
+  const serviceTabIcons = {
+    "Web Development": <Code className="w-4 h-4" />,
+    "Mobile App Development": <Smartphone className="w-4 h-4" />,
+    "Software Development": <Code className="w-4 h-4" />,
+    "VR / Game Design": <Gamepad2 className="w-4 h-4" />,
+    "UX/UI Design": <Layers className="w-4 h-4" />,
+  };
 
   const projects = [
     {
@@ -65,16 +355,8 @@ export default function Portfolio() {
       tech: ["React", "Node.js", "AI/ML"]
     },
     {
-      title: "Identity Branding",
-      category: "Graphic Design",
-      description: "Minimalist branding for a corporate environment",
-      image: "/images/branding/branding-cover.jpg",
-      link: "https://www.behance.net/gallery/133625515/Identity-Branding",
-      tech: ["Figma", "After Effects", "3D"]
-    },
-    {
       title: "VR Little Village Simulation",
-      category: "VR Development",
+      category: "VR / Game Design",
       description: "Come play in our Little Village!",
       image: "/images/village/village.png",
       link: "https://github.com/shan-esco/Village_Environment",
@@ -94,11 +376,11 @@ export default function Portfolio() {
       description: "Design System for an all new re-design!",
       image: "/images/autonation/DesignSystem.jpg",
       link: "https://www.behance.net/gallery/221138663/Truck-Design-System",
-      tech: ["Three.js", "GSAP", "WebGL"]
+      tech: ["Figma"]
     },
     {
       title: "VR Solar System",
-      category: "VR Development",
+      category: "VR / Game Design",
       description: "Explore the Solar System in real-time!",
       image: "/images/solar/solar-cover.png",
       link: "https://github.com/shan-esco/Village_Environment",
@@ -110,7 +392,7 @@ export default function Portfolio() {
       description: "Award-winning portfolio with WebGL effects",
       image: "/images/baseball/image.png",
       link: "https://baseball-coach.vercel.app/",
-      tech: ["Three.js", "REACT", "WebGL"]
+      tech: ["Three.js", "React", "WebGL"]
     },
     {
       title: "Off Chain",
@@ -118,7 +400,7 @@ export default function Portfolio() {
       description: "Designed in 48 hours! Come check out our decentralized wallet!",
       image: "/images/offchain/cover.jpg",
       link: "https://www.behance.net/gallery/154938457/Off-Chain-(Eth-Bogota)",
-      tech: ["Three.js", "GSAP", "WebGL"]
+      tech: ["Figma"]
     },
     {
       title: "Staxx",
@@ -127,14 +409,6 @@ export default function Portfolio() {
       image: "/images/staxx/staxx.jpg",
       link: "https://ethglobal.com/showcase/staxx-bf8pf",
       tech: ["Javascript"]
-    },
-    {
-      title: "Thorn",
-      category: "Graphic Design",
-      description: "An annual report re-design",
-      image: "/images/thorn/cover.jpg",
-      link: "https://www.behance.net/gallery/124084975/Annual-Report",
-      tech: ["Adobe Illustrator"]
     },
     {
       title: "Tacti-Wear",
@@ -162,19 +436,11 @@ export default function Portfolio() {
     },
     {
       title: "Corona Virus VR Game",
-      category: "VR Development",
+      category: "VR / Game Design",
       description: "A VR Simulation game where you can shoot all the parasites you see!",
       image: "/images/virus/virus-cover.png",
       link: "https://github.com/shan-esco/CoronaVirus_VRGame",
       tech: ["Unity", "C#"],
-    },
-    {
-      title: "HappyWater",
-      category: "Graphic Design",
-      description: "HappyWater's New Label Design",
-      image: "/images/happywater/alkaline.jpg",
-      link: "https://www.behance.net/gallery/124517155/Happy-Water",
-      tech: ["Adobe Illustrator"]
     },
     {
       title: "Archi-Tech",
@@ -186,7 +452,7 @@ export default function Portfolio() {
     },
     {
       title: "Tennis VR Trainer",
-      category: "VR Development",
+      category: "VR / Game Design",
       description: "A VR Simulation game where you can workout!",
       image: "/images/workout/workout-cover.png",
       link: "https://github.com/shan-esco/FitnessWorkout_VRGame",
@@ -198,12 +464,13 @@ export default function Portfolio() {
       description: "Re-design for AutoNation's Fleet Services Landing Page",
       image: "/images/fleet/fleet.png",
       link: "https://www.autonation.com/an-fleet-services",
-      tech: ["Three.js", "GSAP", "WebGL"]
+      tech: ["Figma"]
     },
   ];
 
-  const categories = ['All', ...new Set(projects.map(project => project.category))];
-  const filteredProjects = activeCategory === 'All' ? projects : projects.filter(project => project.category === activeCategory);
+  const categories = ['All', ...new Set(projects.map(p => p.category))];
+  const filteredProjects = activeCategory === 'All' ? projects : projects.filter(p => p.category === activeCategory);
+  const activePricing = pricingData[activeServiceTab];
 
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
@@ -211,9 +478,7 @@ export default function Portfolio() {
       <div className="fixed inset-0 opacity-30 pointer-events-none">
         <div
           className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20"
-          style={{
-            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-          }}
+          style={{ transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)` }}
         />
         <div className="absolute inset-0">
           {[...Array(50)].map((_, i) => (
@@ -246,23 +511,29 @@ export default function Portfolio() {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         .animate-glow { animation: glow 3s ease-in-out infinite; }
         .animate-slideIn { animation: slideIn 0.6s ease-out forwards; }
+        .animate-fadeUp { animation: fadeUp 0.35s ease-out forwards; }
+        .pricing-featured-glow {
+          box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.15);
+        }
       `}</style>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black/40 backdrop-blur-xl z-50 border-b border-cyan-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center">
-          {/* Logo */}
           <h1 className="text-lg sm:text-2xl lg:text-3xl font-black tracking-tighter">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               SHANNON<span className="text-white"> ESCORIAZA</span>
             </span>
           </h1>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex gap-6 lg:gap-8 font-medium">
-            {['home', 'services', 'portfolio', 'contact'].map((section) => (
+            {['home', 'services', 'portfolio', 'pricing', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => navigate(section)}
@@ -273,20 +544,14 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden text-white p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
+          <button className="md:hidden text-white p-2" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
         {menuOpen && (
           <div className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20 px-4 py-4 flex flex-col gap-4">
-            {['home', 'services', 'portfolio', 'contact'].map((section) => (
+            {['home', 'services', 'portfolio', 'pricing', 'contact'].map((section) => (
               <button
                 key={section}
                 onClick={() => navigate(section)}
@@ -299,13 +564,10 @@ export default function Portfolio() {
         )}
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       {activeSection === 'home' && (
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6">
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-          >
+          <div className="absolute inset-0 opacity-20" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
             <div className="absolute top-1/4 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-purple-500 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-cyan-500 rounded-full blur-3xl" />
           </div>
@@ -313,25 +575,19 @@ export default function Portfolio() {
           <div className="relative z-10 text-center max-w-5xl animate-slideIn px-2">
             <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-              <span className="text-cyan-400 font-semibold uppercase tracking-widest text-xs sm:text-sm">
-                Digital Craftsman
-              </span>
+              <span className="text-cyan-400 font-semibold uppercase tracking-widest text-xs sm:text-sm">Digital Craftsman</span>
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400" />
             </div>
 
             <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 sm:mb-6 leading-tight tracking-tighter">
-              <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
-                Building The
-              </span>
+              <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">Building The</span>
               <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Future of Web
-              </span>
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Future of Web</span>
             </h2>
 
             <p className="text-base sm:text-xl lg:text-2xl text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto font-light px-2">
               Architecting digital experiences that push boundaries.
-              <span className="text-white font-medium"> Web development, design, and VR</span> that doesn't compromise.
+              <span className="text-white font-medium"> Web, mobile, software, VR, and design</span> that doesn't compromise.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -342,7 +598,6 @@ export default function Portfolio() {
                 <span className="relative z-10">View Work</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
-
               <button
                 onClick={() => setActiveSection('contact')}
                 className="border-2 border-cyan-400 hover:bg-cyan-400/10 px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all hover:scale-105 hover:border-purple-400"
@@ -358,37 +613,31 @@ export default function Portfolio() {
         </section>
       )}
 
-      {/* Services Section */}
+      {/* Services */}
       {activeSection === 'services' && (
         <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12 sm:mb-20">
               <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  What I Do
-                </span>
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">What I Do</span>
               </h2>
               <p className="text-base sm:text-xl text-gray-400">Expertise that delivers results</p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {services.map((service, index) => (
                 <div
                   key={index}
                   className="group relative bg-gradient-to-br from-gray-900 to-black p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-transparent transition-all duration-500 hover:scale-105"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`} />
-
                   <div className={`relative inline-block p-3 sm:p-4 rounded-xl bg-gradient-to-br ${service.color} mb-4 sm:mb-6`}>
                     <div className="text-white">{service.icon}</div>
                   </div>
-
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">{service.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{service.title}</h3>
                   <p className="text-sm sm:text-base text-gray-400 leading-relaxed">{service.description}</p>
-
-                  <div className="mt-4 sm:mt-6 flex items-center text-cyan-400 font-semibold group-hover:gap-2 transition-all text-sm sm:text-base">
-                    Learn More
-                    <ExternalLink className="w-4 h-4 ml-2 group-hover:ml-0 transition-all" />
+                  <div className="mt-4 sm:mt-6 flex items-center text-cyan-400 font-semibold text-sm sm:text-base">
+                    Learn More <ExternalLink className="w-4 h-4 ml-2" />
                   </div>
                 </div>
               ))}
@@ -397,19 +646,16 @@ export default function Portfolio() {
         </section>
       )}
 
-      {/* Portfolio Section */}
+      {/* Portfolio */}
       {activeSection === 'portfolio' && (
         <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-20">
               <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
-                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Featured Work
-                </span>
+                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Featured Work</span>
               </h2>
               <p className="text-base sm:text-xl text-gray-400 mb-6 sm:mb-8">Projects that make an impact</p>
 
-              {/* Category Filter */}
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 {categories.map((category) => (
                   <button
@@ -434,44 +680,23 @@ export default function Portfolio() {
                   className="group relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden border border-gray-800 hover:border-cyan-400/50 transition-all duration-500 hover:scale-[1.02]"
                 >
                   <div className="relative overflow-hidden h-48 sm:h-64">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   </div>
-
                   <div className="p-5 sm:p-8">
                     <div className="flex items-center gap-2 mb-2 sm:mb-3">
                       <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
-                      <span className="text-cyan-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">
-                        {project.category}
-                      </span>
+                      <span className="text-cyan-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">{project.category}</span>
                     </div>
-
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-400 transition-colors">
-                      {project.title}
-                    </h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-400 transition-colors">{project.title}</h3>
                     <p className="text-sm sm:text-base text-gray-400 mb-3 sm:mb-4">{project.description}</p>
-
                     <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                       {project.tech.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-2 sm:px-3 py-1 bg-gray-800 rounded-full text-xs font-semibold text-gray-300"
-                        >
-                          {tech}
-                        </span>
+                        <span key={i} className="px-2 sm:px-3 py-1 bg-gray-800 rounded-full text-xs font-semibold text-gray-300">{tech}</span>
                       ))}
                     </div>
-
-                    <a
-                      href={project.link}
-                      className="inline-flex items-center gap-2 text-cyan-400 hover:text-purple-400 font-semibold transition group/link text-sm sm:text-base"
-                    >
-                      View Project
-                      <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                    <a href={project.link} className="inline-flex items-center gap-2 text-cyan-400 hover:text-purple-400 font-semibold transition text-sm sm:text-base">
+                      View Project <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
@@ -481,52 +706,190 @@ export default function Portfolio() {
         </section>
       )}
 
-      {/* Contact Section */}
+      {/* Pricing */}
+      {activeSection === 'pricing' && (
+        <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/4 left-1/6 w-72 h-72 bg-cyan-500/8 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/3 right-1/6 w-80 h-80 bg-pink-500/8 rounded-full blur-3xl" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-10 sm:mb-12">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                <span className="text-yellow-400 font-semibold uppercase tracking-widest text-xs sm:text-sm">Transparent Pricing</span>
+                <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              </div>
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-4 tracking-tighter">
+                <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Pick Your Plan</span>
+              </h2>
+              <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
+                No hidden fees. No surprises. Just great work at a fair price.
+              </p>
+            </div>
+
+            {/* Service tabs */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+              {Object.keys(pricingData).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveServiceTab(tab)}
+                  className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 ${
+                    activeServiceTab === tab
+                      ? `bg-gradient-to-r ${pricingData[tab].color} text-white scale-105 shadow-lg`
+                      : 'bg-gray-900 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600'
+                  }`}
+                >
+                  {serviceTabIcons[tab]}
+                  <span className="hidden sm:inline">{tab}</span>
+                  <span className="sm:hidden">{tab.split(' ')[0]}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Per project / retainer toggle */}
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex items-center gap-1 bg-gray-900 border border-gray-800 rounded-full p-1.5">
+                <button
+                  onClick={() => setBillingCycle('project')}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    billingCycle === 'project'
+                      ? `bg-gradient-to-r ${activePricing.color} text-white`
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Per Project
+                </button>
+                <button
+                  onClick={() => setBillingCycle('retainer')}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    billingCycle === 'retainer'
+                      ? `bg-gradient-to-r ${activePricing.color} text-white`
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Monthly Retainer
+                  <span className="ml-2 text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full border border-green-500/30">Save ~20%</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Pricing cards */}
+            <div key={activeServiceTab} className="grid lg:grid-cols-3 gap-6 sm:gap-8 items-stretch animate-fadeUp">
+              {activePricing.tiers.map((tier, index) => (
+                <div
+                  key={index}
+                  className={`relative flex flex-col rounded-3xl border transition-all duration-500 hover:scale-[1.02] ${
+                    tier.featured
+                      ? 'bg-gradient-to-b from-gray-900 via-gray-900 to-black pricing-featured-glow border-purple-500/50'
+                      : 'bg-gradient-to-b from-gray-900 to-black border-gray-800 hover:border-gray-600'
+                  }`}
+                >
+                  {tier.featured && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                      <div className={`bg-gradient-to-r ${activePricing.color} text-white text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full`}>
+                        ✦ Most Popular
+                      </div>
+                    </div>
+                  )}
+
+                  <div className={`p-6 sm:p-8 pb-0 ${tier.featured ? 'pt-10 sm:pt-12' : ''}`}>
+                    <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-1">{tier.name}</h3>
+                    <p className="text-gray-500 text-sm mb-6">{tier.tagline}</p>
+
+                    <div className="mb-6">
+                      {tier.custom ? (
+                        <div className={`text-4xl sm:text-5xl font-black tracking-tighter bg-gradient-to-r ${activePricing.color} bg-clip-text text-transparent`}>
+                          Custom
+                        </div>
+                      ) : (
+                        <div className="flex items-end gap-1">
+                          <span className="text-gray-500 text-lg font-semibold">$</span>
+                          <span className={`text-5xl sm:text-6xl font-black tracking-tighter bg-gradient-to-r ${activePricing.color} bg-clip-text text-transparent`}>
+                            {billingCycle === 'project'
+                              ? tier.projectPrice.toLocaleString()
+                              : tier.retainerPrice.toLocaleString()}
+                          </span>
+                        </div>
+                      )}
+                      <p className="text-gray-500 text-sm mt-1">
+                        {tier.custom
+                          ? "Let's scope it together"
+                          : billingCycle === 'project'
+                          ? 'starting price / project'
+                          : 'per month on retainer'}
+                      </p>
+                    </div>
+
+                    <div className={`h-px w-full bg-gradient-to-r ${activePricing.color} opacity-25 mb-6`} />
+                  </div>
+
+                  <div className="flex-1 px-6 sm:px-8 pb-6">
+                    <ul className="space-y-3">
+                      {tier.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3 text-sm sm:text-base">
+                          <span className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br ${activePricing.color} flex items-center justify-center`}>
+                            <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                          </span>
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="p-6 sm:p-8 pt-4">
+                    <button
+                      onClick={() => navigate('contact')}
+                      className={`w-full py-4 rounded-2xl font-bold text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] bg-gradient-to-r ${activePricing.color} text-white ${tier.featured ? 'animate-glow' : 'opacity-90 hover:opacity-100'}`}
+                    >
+                      {tier.custom ? 'Get a Custom Quote →' : 'Get Started →'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center text-gray-600 text-sm mt-10">
+              All prices are starting estimates — final quotes based on project scope.{' '}
+              <button onClick={() => navigate('contact')} className="text-cyan-400 hover:text-purple-400 transition underline underline-offset-2">
+                Let's chat about your project.
+              </button>
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* Contact */}
       {activeSection === 'contact' && (
         <section className="relative min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6 flex items-center">
           <div className="max-w-4xl mx-auto w-full">
             <div className="text-center mb-10 sm:mb-16">
               <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tighter">
-                <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
-                  Let's Build Something
-                </span>
+                <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">Let's Build Something</span>
               </h2>
               <p className="text-base sm:text-2xl text-gray-400">Got a project in mind? Let's make it happen.</p>
             </div>
 
             <div className="flex justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
-              <a href="mailto:shanescobiz@gmail.com"
-                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-cyan-400 transition-all hover:scale-110">
+              <a href="mailto:shanescobiz@gmail.com" className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-cyan-400 transition-all hover:scale-110">
                 <Mail className="w-7 h-7 sm:w-10 sm:h-10 text-cyan-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://github.com/shan-esco"
-                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-purple-400 transition-all hover:scale-110">
+              <a href="https://github.com/shan-esco" className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-purple-400 transition-all hover:scale-110">
                 <Github className="w-7 h-7 sm:w-10 sm:h-10 text-purple-400 group-hover:scale-110 transition-transform" />
               </a>
-              <a href="https://www.linkedin.com/in/shan-esco/"
-                className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-pink-400 transition-all hover:scale-110">
+              <a href="https://www.linkedin.com/in/shan-esco/" className="group p-4 sm:p-6 bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gray-800 hover:border-pink-400 transition-all hover:scale-110">
                 <Linkedin className="w-7 h-7 sm:w-10 sm:h-10 text-pink-400 group-hover:scale-110 transition-transform" />
               </a>
             </div>
 
             <div className="bg-gradient-to-br from-gray-900 to-black p-6 sm:p-10 rounded-3xl border border-gray-800">
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full"
-                />
+                <input type="text" placeholder="Your Name" className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full" />
+                <input type="email" placeholder="Your Email" className="bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg w-full" />
               </div>
-              <textarea
-                placeholder="Tell me about your project..."
-                rows="6"
-                className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 mb-4 sm:mb-6 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg"
-              ></textarea>
+              <textarea placeholder="Tell me about your project..." rows="6" className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 sm:px-6 py-3 sm:py-4 mb-4 sm:mb-6 focus:outline-none focus:border-cyan-400 transition-colors text-base sm:text-lg"></textarea>
               <button className="w-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-bold text-lg sm:text-xl transition-all hover:scale-[1.02] animate-glow">
                 Send Message
               </button>
