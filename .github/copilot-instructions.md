@@ -1,4 +1,4 @@
-# Copilot Instructions - Workfolio Portfolio
+# Workfolio Portfolio
 
 ## Project Overview
 **Workfolio** is a React-based portfolio website showcasing Shannon Escoriaza's multidisciplinary work across web development, graphic design, VR development, and UX/UI design. Built with Create React App, styled with Tailwind CSS, and featuring interactive animations using Lucide React icons.
